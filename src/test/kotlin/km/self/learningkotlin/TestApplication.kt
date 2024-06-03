@@ -11,14 +11,13 @@ import org.testcontainers.utility.DockerImageName
 @TestConfiguration(proxyBeanMethods = false)
 class TestApplication {
 
-	@Bean
-	@ServiceConnection
-	fun postgresContainer(): PostgreSQLContainer<*> {
-		return PostgreSQLContainer(DockerImageName.parse("postgres:latest"))
-	}
-
+  @Bean
+  @ServiceConnection
+  fun postgresContainer(): PostgreSQLContainer<*> {
+    return PostgreSQLContainer(DockerImageName.parse("postgres:latest"))
+  }
 }
 
 fun main(args: Array<String>) {
-	fromApplication<Application>().with(TestApplication::class).run(*args)
+  fromApplication<Application>().with(TestApplication::class).run(*args)
 }

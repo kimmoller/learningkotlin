@@ -7,6 +7,6 @@ import jakarta.persistence.Id
 
 @Entity(name = "Application")
 data class ApplicationEntity(
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) val id: Long?,
-    val name: String
+  @Id @GeneratedValue(strategy = GenerationType.IDENTITY) val id: Long?,
+  val name: String
 )

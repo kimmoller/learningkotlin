@@ -7,24 +7,26 @@ import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.test.context.jdbc.Sql
 
-@Sql(statements = [
-    "insert into application(name) values('writeTestApplication')",
-    "insert into application(name) values('secondWriteTestApplication')"
-])
-class DbWriteTest: DbSetup() {
-    @Autowired
-    lateinit var applicationRepository: ApplicationRepository
+@Sql(
+  statements =
+    [
+      "insert into application(name) values('writeTestApplication')",
+      "insert into application(name) values('secondWriteTestApplication')"
+    ]
+)
+class DbWriteTest : DbSetup() {
+  @Autowired lateinit var applicationRepository: ApplicationRepository
 
-    @Test
-    fun writeToDb() {
-        val all = applicationRepository.findAll()
-        assertEquals(2, all.size)
+  @Test
+  fun writeToDb() {
+    val all = applicationRepository.findAll()
+    assertEquals(2, all.size)
 
-        val applicationEntity = ApplicationEntity(null, "Written Application")
-        applicationRepository.save(applicationEntity)
+    val applicationEntity = ApplicationEntity(null, "Written Application")
+    applicationRepository.save(applicationEntity)
 
-        val application = applicationRepository.findById(3).orElseThrow()
-        assertEquals(3, application.id)
-        assertEquals("Written Application", application.name)
-    }
+    val application = applicationRepository.findById(3).orElseThrow()
+    assertEquals(3, application.id)
+    assertEquals("Written Application", application.name)
+  }
 }
